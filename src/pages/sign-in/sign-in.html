@@ -2,28 +2,24 @@
 <ion-header>
 
   <ion-navbar color="danger">
-    <ion-title>sign-in</ion-title>
+    <ion-title>Sign-In</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 <ion-content padding>
-  <ion-list>
-
-    <ion-item>
-      <ion-input type="text" placeholder="Username"
-      [(ngModel)]="username">
-      </ion-input>
-    </ion-item>
-  
-    <ion-item>
-        <ion-input type="password" placeholder="Password"></ion-input>
-    </ion-item>
-
-  </ion-list>
-
-  <ion-fab bottom center>
-    <button ion-fab (click)="goToDisplay()">GO</button>
-  </ion-fab>
-
+  <form #f="ngForm" (ngSubmit)="onSignIn(f)"> <!-- form f is being passed onRegister()-->
+    <ion-list>
+      <ion-item>
+        <ion-label stacked>E-Mail</ion-label>
+        <ion-input type="email" ngModel name="email"></ion-input>
+      </ion-item>
+    
+        <ion-item>
+            <ion-label stacked>Password</ion-label>
+            <ion-input type="password" ngModel name="password"></ion-input>
+          </ion-item>
+    </ion-list>
+    <button ion-button block type="submit" [disabled]="!f.valid">Sign In</button> <!--Disable button if form f is not valid -->
+  </form>
 </ion-content>

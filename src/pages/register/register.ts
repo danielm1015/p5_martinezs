@@ -1,13 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { DisplayPage } from '../display/display';
+import { NgForm } from '@angular/forms';
+import { AuthService } from '../../services/auth';
 
-/**
- * Generated class for the RegisterPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -16,14 +12,18 @@ import { DisplayPage } from '../display/display';
 })
 export class RegisterPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private authService: AuthService) {
   }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad RegisterPage');
-  }
+ 
   goToDisplay(){
     this.navCtrl.push(DisplayPage);
+  }
+
+  // Register.html Line 17: form data passing through
+  onRegister(form: NgForm) {
+    this.authService.register(form.value.email, form.value.password)
+    .then(data => console.log(data))
+    .catch(error => console.log(error));
   }
 
 }
