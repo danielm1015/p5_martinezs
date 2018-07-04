@@ -2,7 +2,7 @@ import firebase from 'firebase';
 
 export class AuthService {
     register(email: string, password: string) {
-        return firebase.auth().createUserAndRetrieveDataWithEmailAndPassword(email, password);
+        return firebase.auth().createUserWithEmailAndPassword(email, password);
     }
     signin(email: string, password: string) {
         firebase.auth().signInWithEmailAndPassword(email, password);
