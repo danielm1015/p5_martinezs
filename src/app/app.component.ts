@@ -26,8 +26,7 @@ export class MyApp {
     private menuCtrl: MenuController, private authService: AuthService)  {
     // Firebase imported and initialized
       firebase.initializeApp({
-        apiKey: "AIzaSyAS3UMy0oJm4UeYQUUIncpl1QGutXaMdYQ",
-        authDomain: "tabsex-bc319.firebaseapp.com"
+        
       })
 
       firebase.auth().onAuthStateChanged(user => {
