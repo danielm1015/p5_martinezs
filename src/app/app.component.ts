@@ -4,15 +4,20 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import firebase from 'firebase';
 
-import { HomePage } from '../pages/home/home';
 import { AuthService } from '../services/auth';
 import { DisplayPage } from '../pages/display/display';
+import { SignInPage } from '../pages/sign-in/sign-in';
+import { RegisterPage } from '../pages/register/register';
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
 
-  rootPage:any = HomePage;
+  rootPage: any = SignInPage;
+  
+  signInPage = SignInPage;
+  registerPage = RegisterPage;
+
   isAuthenticated = false;
   @ViewChild('nav') nav: NavController;
 
@@ -21,7 +26,8 @@ export class MyApp {
     private menuCtrl: MenuController, private authService: AuthService)  {
     // Firebase imported and initialized
       firebase.initializeApp({
-      
+        apiKey: "AIzaSyAS3UMy0oJm4UeYQUUIncpl1QGutXaMdYQ",
+        authDomain: "tabsex-bc319.firebaseapp.com"
       })
 
       firebase.auth().onAuthStateChanged(user => {
@@ -30,7 +36,7 @@ export class MyApp {
           this.rootPage = DisplayPage;
         } else {
            this.isAuthenticated = false;
-           this.rootPage = HomePage;
+           this.rootPage = SignInPage;
         }
       })
 
@@ -42,10 +48,15 @@ export class MyApp {
     });
   }
 
+    onLoad(page: any){
+    this.nav.setRoot(page);
+    this.menuCtrl.close();
+  }
+
     onLogOut() {
       this.authService.logout();
       this.menuCtrl.close();
-      this.nav.setRoot(HomePage);
+      this.nav.setRoot(SignInPage);
       
     }
 }
